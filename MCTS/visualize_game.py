@@ -110,9 +110,9 @@ def run_and_visualize():
     steps = 50
     final_payoff = 0
     for s in range(steps):
-        # ==========================================
+
         # PHASE 1: ATTACKER'S TURN
-        # ==========================================
+        
         game.turn = 'attacker'
         a_move = mcts_search(game, root_turn='attacker', iterations=150)
         
@@ -132,7 +132,7 @@ def run_and_visualize():
             belief_history.append(game.beliefs.copy())
             
             final_payoff = payoff
-            # --- NEW FIX ---
+           
             if payoff > 0:
                 print(f"Step {s} (Attacker Reached Goal!): A at {game.a_pos}, D at {game.d_pos}")
             else:
@@ -140,9 +140,9 @@ def run_and_visualize():
             # ---------------
             print(f"Game Over! Final Payoff: {final_payoff}")
             break
-        # ==========================================
+
         # PHASE 2: DEFENDER'S TURN
-        # ==========================================
+
         game.turn = 'defender'
         # Defender searches using the newly updated belief
         d_move = mcts_search(game, root_turn='defender', iterations=150)
@@ -208,7 +208,7 @@ def run_and_visualize():
     ax2.legend()
 
     plt.tight_layout()
-    plt.savefig("simulation_results.png") # Saves for your presentation
+    plt.savefig("simulation_results.png") 
     plt.show()
 
 if __name__ == "__main__":

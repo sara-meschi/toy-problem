@@ -12,7 +12,7 @@ class ReachAvoidGame:
         # State is now clearly defined
         self.a_pos = (size-1, 0)
         # self.d_pos = (0, size-1)
-        self.d_pos = (size//2, size//2)
+        self.d_pos = (size//2, size//2) # Be careful about odd number grid size!!!
         self.beliefs = np.array([0.5, 0.5])
         self.turn = 'attacker' # Alternating turns
 
@@ -34,7 +34,7 @@ class ReachAvoidGame:
             d_new = nx.shortest_path_length(self.graph, new_a, g)
             
             if d_new < d_old:
-                prob = 0.8  # Move is explicit/consistent with this goal
+                prob = 0.8  # Move is consistent with this goal
             elif d_new == d_old:
                 prob = 0.5  # Move is ambiguous regarding this goal
             else:
@@ -60,7 +60,7 @@ class ReachAvoidGame:
             
         return new_a, new_d, new_beliefs, next_turn
 
-# --- UPGRADED BELIEF-STATE MCTS ---
+# --- BELIEF-STATE MCTS ---
 class MCTSNode:
     def __init__(self, a_pos, d_pos, beliefs, turn, move=None, parent=None):
         self.a_pos = a_pos
